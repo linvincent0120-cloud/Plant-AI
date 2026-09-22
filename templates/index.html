@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Plant AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header>
+            <h1>🌱 Plant AI</h1>
+            <p>智慧植物監測系統</p>
+        </header>
+
+        <main>
+
+            <section class="plant-card">
+
+                <h2>植物影像分析</h2>
+
+                {% if image_url %}
+                    <img src="{{ image_url }}" class="plant-image">
+                {% else %}
+                    <div class="photo-box">
+                        🌱
+                    </div>
+                {% endif %}
+
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+
+                    <input
+                        type="file"
+                        name="photo"
+                        accept="image/*"
+                        required
+                    >
+
+                    <button type="submit">
+                        📷 上傳植物照片
+                    </button>
+
+                </form>
+
+            </section>
+
+            <section class="data-card">
+
+                <h2>🤖 AI 分析結果</h2>
+
+                <div class="result">
+                    <p>目前狀態：等待分析</p>
+                    <p>信心度：--</p>
+                </div>
+
+                <h2>📊 植物資料</h2>
+
+                <div class="data">
+                    <p>🌱 植物高度：--</p>
+                    <p>🍃 葉片面積：--</p>
+                    <p>🟢 綠色比例：--</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
