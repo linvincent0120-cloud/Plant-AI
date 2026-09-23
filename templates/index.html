@@ -2,73 +2,143 @@
 <html lang="zh-TW">
 
 <head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Plant AI</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <div class="app">
+<div class="app">
 
-        <header>
-            <h1>🌱 Plant AI</h1>
-            <p>智慧植物監測系統</p>
-        </header>
+    <header>
 
-        <main>
+        <h1>🌱 Plant AI</h1>
 
-            <section class="plant-card">
+        <p>智慧植物影像監測系統</p>
 
-                <h2>植物影像分析</h2>
+    </header>
 
-                {% if image_url %}
-                    <img src="{{ image_url }}" class="plant-image">
-                {% else %}
-                    <div class="photo-box">
-                        🌱
-                    </div>
-                {% endif %}
 
-                <form action="/upload" method="POST" enctype="multipart/form-data">
+    <main>
 
-                    <input
-                        type="file"
-                        name="photo"
-                        accept="image/*"
-                        required
-                    >
+        <!-- 上傳區 -->
 
-                    <button type="submit">
-                        📷 上傳植物照片
-                    </button>
+        <section class="card">
 
-                </form>
+            <h2>📷 植物影像分析</h2>
 
-            </section>
+            <p>
+                上傳植物照片，系統將自動分析植物影像。
+            </p>
 
-            <section class="data-card">
+            <form
+                action="/"
+                method="POST"
+                enctype="multipart/form-data"
+            >
 
-                <h2>🤖 AI 分析結果</h2>
+                <input
+                    type="file"
+                    name="plant_image"
+                    accept="image/*"
+                    required
+                >
 
-                <div class="result">
-                    <p>目前狀態：等待分析</p>
-                    <p>信心度：--</p>
-                </div>
+                <button type="submit">
+                    🔍 開始分析
+                </button>
 
-                <h2>📊 植物資料</h2>
+            </form>
 
-                <div class="data">
-                    <p>🌱 植物高度：--</p>
-                    <p>🍃 葉片面積：--</p>
-                    <p>🟢 綠色比例：--</p>
-                </div>
 
-            </section>
+            {% if image_url %}
 
-        </main>
+            <h3>目前分析圖片</h3>
 
-    </div>
+            <img
+                src="{{ image_url }}"
+                class="plant-image"
+                alt="植物圖片"
+            >
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- 分析結果 -->
+
+        <section class="card">
+
+            <h2>🤖 AI 分析結果</h2>
+
+            {% if result %}
+
+            <div class="data">
+
+                <p>
+                    🌱 狀態：
+                    <strong>{{ result.status }}</strong>
+                </p>
+
+                <p>
+                    📐 圖片大小：
+                    {{ result.width }} × {{ result.height }}
+                </p>
+
+                <p>
+                    🟢 綠色像素：
+                    {{ result.green_pixels }}
+                </p>
+
+                <p>
+                    🌿 綠色比例：
+                    <strong>{{ result.green_ratio }}%</strong>
+                </p>
+
+                <p>
+                    📊 植物區域面積：
+                    {{ result.plant_area }} px²
+                </p>
+
+                <p>
+                    ↔️ 植物影像寬度：
+                    {{ result.plant_width }} px
+                </p>
+
+                <p>
+                    ↕️ 植物影像高度：
+                    {{ result.plant_height }} px
+                </p>
+
+            </div>
+
+            {% else %}
+
+            <p>
+                尚未分析圖片
+            </p>
+
+            <p>
+                請先上傳植物照片。
+            </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</div>
 
 </body>
 
