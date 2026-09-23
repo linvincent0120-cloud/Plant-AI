@@ -79,7 +79,7 @@
 
         <section class="card">
 
-            <h2>AI 分析結果</h2>
+            <h2>🤖 AI 分析結果</h2>
 
             {% if result %}
 
@@ -87,7 +87,9 @@
 
                 <p>
                     🌱 狀態：
-                    <strong>{{ result.status }}</strong>
+                    <strong>
+                        {{ result.status }}
+                    </strong>
                 </p>
 
                 <p>
@@ -102,7 +104,9 @@
 
                 <p>
                     🌿 綠色比例：
-                    <strong>{{ result.green_ratio }}%</strong>
+                    <strong>
+                        {{ result.green_ratio }}%
+                    </strong>
                 </p>
 
                 <p>
@@ -130,6 +134,61 @@
 
             <p>
                 請先上傳植物照片。
+            </p>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- 歷史紀錄 -->
+
+        <section class="card">
+
+            <h2>📊 歷史紀錄</h2>
+
+            {% if records %}
+
+            <div class="data">
+
+                {% for record in records %}
+
+                <p>
+
+                    🕒 {{ record["date"] }}
+
+                    <br>
+
+                    🌿 綠色比例：
+                    <strong>
+                        {{ record["green_ratio"] }}%
+                    </strong>
+
+                    <br>
+
+                    📐 植物面積：
+                    {{ record["plant_area"] }} px²
+
+                    <br>
+
+                    ↔️ 寬度：
+                    {{ record["plant_width"] }} px
+
+                    <br>
+
+                    ↕️ 高度：
+                    {{ record["plant_height"] }} px
+
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <p>
+                目前還沒有分析紀錄。
             </p>
 
             {% endif %}
