@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Plant AI 管理員登入</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <section class="card">
+
+        <h1>🔐 管理員登入</h1>
+
+        <p>
+            Plant AI 管理系統
+        </p>
+
+        {% if error %}
+
+        <p>
+            ❌ {{ error }}
+        </p>
+
+        {% endif %}
+
+        <form method="POST">
+
+            <input
+                type="password"
+                name="password"
+                placeholder="管理員密碼"
+                required
+            >
+
+            <button type="submit">
+                登入
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/">
+            ← 返回 Plant AI
+        </a>
+
+    </section>
+
+</div>
+
+</body>
+
+</html>
